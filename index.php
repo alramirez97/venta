@@ -27,6 +27,7 @@
 		 	$pass = md5(mysqli_real_escape_string($conexion,$_POST['clave']));
 
 		 	$query = mysqli_query($conexion, "SELECT * FROM usuario WHERE usuario='$user' AND clave='$pass'");
+		 	
 		 	$resultado = mysqli_num_rows($query);
 
 
@@ -149,9 +150,9 @@
     <!-- /.login-box -->
 
 <!-- jQuery 3 -->
-<script src="<?php echo base_url();?>assets/template/jquery/jquery.min.js"></script>
+<script src="assets/template/jquery/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="<?php echo base_url();?>assets/template/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/template/bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 </html>

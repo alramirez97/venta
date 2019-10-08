@@ -6,7 +6,7 @@
 
 	?>
 
-	<?php include "../sistema/includes/headers.php"; ?>
+	<?php include "includes/headers.php"; ?>
 
 <!-- =============================================== -->
 
@@ -44,6 +44,7 @@
 						$rol = $_POST['rol'];
 
 						$query = mysqli_query($conexion, "SELECT * FROM usuario WHERE usuario = '$user' OR correo = '$email'");
+						mysqli_close($conexion);
 						$resultado = mysqli_fetch_array($query); 
 						if($resultado > 0):?>
 							<?php //header('location: ../sistema/lista_usuarios.php'); ?>
@@ -55,7 +56,7 @@
 						
 						
 						<?php else: ?>
-							<?php echo '<div style="width: 100%; background: #66e07d66; border-radius: 5px; margin: 20px auto;"><p style="color: #e65656; font-size: 14px;">Error al crear el usuario.</p></div>'; ?>
+							<?php echo '<div style="width: 100%; background: #66e07d66; border-radius: 5px; margin: 20px auto;"><p style="color: #e65656; font-size: 14px;">Error aal crear el usuario.</p></div>'; ?>
 						<?php endif; ?>
 					<?php endif; ?>
 				<?php endif; ?>
@@ -84,6 +85,7 @@
 					<label for="rol">Tipo usuario</label>
 					<?php 
 					$query_rol =  mysqli_query($conexion, "SELECT * FROM rol");
+					mysqli_close($conexion);
 					$result_rol = mysqli_num_rows($query_rol);
 					?>
 					<div class="form-group">
@@ -100,7 +102,7 @@
 				</div>
 					<div class="form-group">
 						<button type="submit" class="btn btn-success btn-info"><i class='fa fa-save'></i> Guardar</button>
-						<a href="lista_usuarios.php" class="btn btn-success btn-danger"><i class='fa fa-ban'> </i> Cancelar</a> 
+						<a href="../sistema/lista_usuarios.php" class="btn btn-success btn-danger"><i class='fa fa-ban'> </i> Cancelar</a> 
                      </div>
 
 				</form>

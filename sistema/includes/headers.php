@@ -1,6 +1,6 @@
 <?php 
 
-session_start();
+
 if (empty($_SESSION['active'])) {
 		header('location: ../');
 	}
@@ -17,7 +17,7 @@ if (empty($_SESSION['active'])) {
    <link rel="stylesheet" href="../sistema/bower_components/datatables.net-bs/css/dataTables.bootstrap.css">
 
   <link rel="stylesheet" href="../sistema/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-  <?php include "includes/scripts.php"; ?>
+  <?php include "../sistema/includes/scripts.php"; ?>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <!-- Site wrapper -->
@@ -64,4 +64,4 @@ if (empty($_SESSION['active'])) {
             </nav>
         </header>
 
-  <?php include "includes/aside.php"; ?>
+  <?php include "../sistema/includes/aside.php"; ?>

@@ -49,6 +49,20 @@
 	cursor: pointer;
 	margin: 20px;
 }
+.contents {
+  min-height: 250px;
+  padding: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+.colorC{
+	color: #dd4b39;
+	padding-left: 300px;
+  	padding-right: 300px;
+}
 /*table{
 	border-collapse: collapse;
 	font-size: 12pt;

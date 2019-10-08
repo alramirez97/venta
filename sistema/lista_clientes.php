@@ -13,8 +13,8 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1><i class='fa fa-users'> </i>
-        Usuarios
+        <h1><i class='fa fa-list-ul'> </i>
+        Clientes
         <small>Listado</small>
         </h1>
     </section>
@@ -25,7 +25,7 @@
             <div class="box-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="registro_usuarios.php" class="btn btn-primary btn-flat"><span class="fa fa-user-plus"></span> Agregar Usuario</a>
+                        <a href="registro_clientes.php" class="btn btn-primary btn-flat"><span class="fa fa-user-plus"></span> Agregar Cliente</a>
                     </div>
                 </div>
                 <hr>
@@ -36,38 +36,48 @@
 				<tr>
 					<th>#</th>
 					<th>Nombre</th>
-					<th>Correo</th>
-          <th>Usuario</th>
-					<th>Rol</th>
+          <th>Tipo de Cliente</th>
+          <th>Tipo de Documento</th>
+          <th>No. de documento</th>
+          <th>Telefono</th>
+          <th>Dirección</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
             <tbody>
             		<?php 
-					$query = mysqli_query($conexion,"SELECT u.idusuario, u.nombre, u.correo, u.usuario, r.rol FROM usuario u INNER JOIN rol r ON u.rol=r.idrol WHERE estado = 1");
-          mysqli_close($conexion);
+                include "../conexion.php";
+					$query = mysqli_query($conexion,"SELECT c.*,tc.nombre AS tipocliente, td.nombre AS tipodocumento, u.nombre AS usuario
+                                           FROM cliente c
+                                           JOIN tipo_cliente tc ON c.tipo_cliente_id = tc.id
+                                           JOIN tipo_documento td ON c.tipo_documento_id = td.id
+                                           JOIN usuario u ON c.usuario_id  = u.idusuario
+                                           WHERE c.estado = 1");
+          
 					$resultado = mysqli_num_rows($query);
 					if ($resultado > 0) {
 					while ($data = mysqli_fetch_array($query)) {
 
 					?>
           <tr>
-            <td><?php echo $data["idusuario"];?></td>
+            <td><?php echo $data["idcliente"];?></td>
 						<td><?php echo $data["nombre"]; ?></td>
-						<td><?php echo $data["correo"]; ?></td>
-            <td><?php echo $data["usuario"]; ?></td>
-						<td><?php echo $data["rol"] ?></td>
-          <?php $datausuario = $data["idusuario"]."*".$data["nombre"]."*".$data["correo"]."*".$data["usuario"]."*".$data["rol"];?>
+						<td><?php echo $data["tipocliente"]; ?></td>
+            <td><?php echo $data["tipodocumento"]; ?></td>
+						<td><?php echo $data["num_documento"] ?></td>
+            <td><?php echo $data["telefono"] ?></td>
+            <td><?php echo $data["direccion"] ?></td>
+          <?php $datacliente = $data["idcliente"]."*".$data["nombre"]."*".$data["tipocliente"]."*".$data["tipodocumento"]."*".$data["num_documento"]."*".$data["telefono"]."*".$data["direccion"]."*".$data["dateadd"];?>
            <td>
                 <div class="btn-group">
-                    <button type="button" class="btn btn-info btn-view-producto" data-toggle="modal" data-target="#modal-default" value="<?php echo $datausuario;?>">
+                    <button type="button" class="btn btn-info btn-view-cliente" data-toggle="modal" data-target="#modal-default" value="<?php echo $datacliente;?>">
                     <span class="fa fa-search"></span>
                     </button>
                     <a href="editar_usuario.php?id=<?php echo $data["idusuario"]; ?>" class="btn btn-warning"><span class="fa fa-pencil"></span></a>
-                    <?php if($data["idusuario"]!=1): ?>
+                    <?php //if($data["idusuario"]!=1): ?>
 								    <a href="eliminar_confirmar.php?id=<?php echo $data["idusuario"]; ?>" class="btn btn-danger btn-remove"><span class="fa fa-remove"></span></a>
-                    <?php else: ?>
-                  <?php endif; ?>
+                    <?php //else: ?>
+                  <?php //endif; ?>
 							 </div>
             </td>
           </tr>

@@ -7,7 +7,7 @@
 
  ?>
 
- <?php include "../sistema/includes/headers.php" ?>
+ <?php include "includes/headers.php" ?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -119,4 +119,4 @@
 
 
 
-	<?php include "../sistema/includes/footer.php" ?>
+	<?php include "includes/footer.php" ?>

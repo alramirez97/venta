@@ -25,6 +25,7 @@
  
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 -->
+<link rel="stylesheet" href="../sistema/css/style.css">
 
   <link rel="stylesheet" href="../assets/template/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/template/jquery-ui/jquery-ui.css">
