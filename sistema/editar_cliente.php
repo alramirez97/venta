@@ -80,7 +80,7 @@ include "../conexion.php";
 														WHERE idcliente = $idcliente;");
 
 				if($sql_update){
-					//header('Location: ../sistema/lista_clientes.php');
+					header('Location: ../sistema/lista_clientes.php');
 				}else{
 					
 				}

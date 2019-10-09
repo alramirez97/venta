@@ -73,7 +73,7 @@
                     </button>
                     <a href="editar_cliente.php?id=<?php echo $data["idcliente"]; ?>" class="btn btn-warning"><span class="fa fa-pencil"></span></a>
                     <?php //if($data["idusuario"]!=1): ?>
-								    <a href="eliminar_cliente.php?id=<?php echo $data["idcliente"]; ?>" class="btn btn-danger btn-remove"><span class="fa fa-remove"></span></a>
+								    <a href="eliminar_clientes.php?id=<?php echo $data["idcliente"]; ?>" class="btn btn-danger btn-remove"><span class="fa fa-remove"></span></a>
                     <?php //else: ?>
                   <?php //endif; ?>
 							 </div>
