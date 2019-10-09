@@ -31,7 +31,7 @@
 			if(!empty($_POST)):?>
 				<?php  $alert='';?>
 				<?php if(empty($_POST['nombre']) || empty($_POST['tipocliente']) || empty($_POST['tipodocumento']) || empty($_POST['numero'])): ?>
-				<?php echo '<div style="width: 100%; background: #66e07d66; border-radius: 5px; margin: 20px auto;"><p style="color: #e65656; font-size: 14px;">Todos los campos son obligatorios.</p></div>'; ?>
+				<?php echo '<div class="alert"><p class="msg_error">Todos los campos son obligatorios.</p></div>'; ?>
 				
 
 				<?php else:?>
@@ -50,18 +50,18 @@
 						$resultado = mysqli_fetch_array($query); 
 						if($resultado > 0):?>
 							<?php //header('location: ../sistema/lista_usuarios.php'); ?>
-								<?php echo '<div style="width: 100%; background: #66e07d66; border-radius: 5px; margin: 20px auto;"><p style="color: #e65656; font-size: 14px;">El numero de documento o el nombre del cliente ya existe.</p></div>'; ?>
+								<?php echo '<div class="alert"><p class="msg_error">El numero de documento o el nombre del cliente ya existe.</p></div>'; ?>
 						<?php else: ?>
 
 							<?php 
 							
 							$query_insert = mysqli_query($conexion, "INSERT INTO cliente(num_documento, nombre,telefono, direccion, usuario_id, tipo_cliente_id, tipo_documento_id) VALUES('$numero','$nombre','$telefono','$direccion','$usuario','$tipocliente','$tipodocumento')");
 						if ($query_insert):?>
-							<?php echo '<div style="width: 100%; background: #66e07d66; border-radius: 5px; margin: 20px auto;"><p style="color: #126e00; font-size: 14px;">Cliente creado exitosamente</p></div>'; ?>
+							<?php echo '<div class="alert"><p class="msg_save">Cliente creado exitosamente</p></div>'; ?>
 						
 						
 						<?php else: ?>
-							<?php echo '<div style="width: 100%; background: #66e07d66; border-radius: 5px; margin: 20px auto;"><p style="color: #e65656; font-size: 14px;">Error al crear el cliente.</p></div>'; ?>
+							<?php echo '<div class="alert"><p class="msg_error">Error al crear el cliente.</p></div>'; ?>
 						<?php endif; ?>
 					<?php endif; ?>
 				<?php endif; ?>

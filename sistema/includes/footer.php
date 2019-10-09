@@ -67,18 +67,15 @@ $(document).ready(function () {
         html += "<p><strong>Direccion:</strong>"+infocliente[6]+"</p>"
         $("#modal-default .modal-body").html(html);
     });
-    $(".btn-view").on("click", function(){
-        var id = $(this).val();
-        $.ajax({
-            url: base_url + "mantenimiento/categorias/view/" + id,
-            type:"POST",
-            success:function(resp){
-                $("#modal-default .modal-body").html(resp);
-                //alert(resp);
-            }
-
-        });
-
+     $(".btn-view-proveedor").on("click", function(){
+        var data = $(this).val(); 
+        //alert(producto);
+        var infoproveedor = data.split("*");
+        html = "<p><strong>Proveedor: </strong>"+infoproveedor[1]+"</p>"
+        html += "<p><strong>Contacto: </strong>"+infoproveedor[2]+"</p> "
+        html += "<p><strong>Telefono: </strong>"+infoproveedor[3]+"</p>"
+        html += "<p><strong>Direccion: </strong>"+infoproveedor[4]+"</p>"
+        $("#modal-default .modal-body").html(html);
     });
     $('#example1').DataTable({
         "language": {
@@ -97,7 +94,9 @@ $(document).ready(function () {
             },
         }
     });
+
     $('.sidebar-menu').tree();
+
     $("#comprobantes").on("change", function(){
         option = $(this).val();
         if (option != "") {
@@ -235,6 +234,22 @@ function numerosenteros(e) {
     key = e.keyCode || e.which;
     teclado = String.fromCharCode(key);
     numeros="0123456789";
+    especiales="8-37-38-46";
+    teclado_especial=false;
+    for(var i in especiales){
+        if (key==especiales[i]) {
+            teclado_especial=true;
+        }
+    }
+    if(numeros.indexOf(teclado)==-1 && !teclado_especial){
+        return false;
+    }
+}
+
+function numerosenterosSinCero(e) {
+    key = e.keyCode || e.which;
+    teclado = String.fromCharCode(key);
+    numeros="123456789";
     especiales="8-37-38-46";
     teclado_especial=false;
     for(var i in especiales){

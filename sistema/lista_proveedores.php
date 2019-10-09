@@ -1,6 +1,8 @@
 <?php 
   session_start();
-  
+  if($_SESSION['rol'] != 1){
+    header('Location: ./');
+  }
 	include "../conexion.php";
 
  ?>
@@ -12,7 +14,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1><i class='fa fa-list-ul'> </i>
-        Clientes
+        Proveedores
         <small>Listado</small>
         </h1>
     </section>
@@ -23,7 +25,7 @@
             <div class="box-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="registro_clientes.php" class="btn btn-primary btn-flat"><span class="fa fa-user-plus"></span> Agregar Cliente</a>
+                        <a href="registro_proveedores.php" class="btn btn-primary btn-flat"><span class="fa fa-plus"></span><?php mysqli_close($conexion); ?> Agregar Proveedor</a>
                     </div>
                 </div>
                 <hr>
@@ -34,23 +36,19 @@
 				<tr>
 					<th>#</th>
 					<th>Nombre</th>
-          <th>Tipo Cliente</th>
-          <th>Tipo Documento</th>
-          <th>No. Documento</th>
+          <th>Contacto</th>
           <th>Telefono</th>
           <th>Dirección</th>
+          <th>Fecha</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
             <tbody>
             		<?php 
                 include "../conexion.php";
-					$query = mysqli_query($conexion,"SELECT c.*,tc.nombre AS tipocliente, td.nombre AS tipodocumento, u.nombre AS usuario
-                                           FROM cliente c
-                                           JOIN tipo_cliente tc ON c.tipo_cliente_id = tc.id
-                                           JOIN tipo_documento td ON c.tipo_documento_id = td.id
-                                           JOIN usuario u ON c.usuario_id  = u.idusuario
-                                           WHERE c.estado = 1");
+					$query = mysqli_query($conexion,"SELECT *
+                                           FROM proveedor
+                                           WHERE estado = 1");
           
 					$resultado = mysqli_num_rows($query);
 					if ($resultado > 0) {
@@ -58,24 +56,23 @@
 
 					?>
           <tr>
-            <td><?php echo $data["idcliente"];?></td>
-						<td><?php echo $data["nombre"]; ?></td>
-						<td><?php echo $data["tipocliente"]; ?></td>
-            <td><?php echo $data["tipodocumento"]; ?></td>
-						<td><?php echo $data["num_documento"] ?></td>
+            <td><?php echo $data["codproveedor"];?></td>
+						<td><?php echo $data["proveedor"]; ?></td>
+						<td><?php echo $data["contacto"]; ?></td>
             <td><?php echo $data["telefono"] ?></td>
             <td><?php echo $data["direccion"] ?></td>
-          <?php $datacliente = $data["idcliente"]."*".$data["nombre"]."*".$data["tipocliente"]."*".$data["tipodocumento"]."*".$data["num_documento"]."*".$data["telefono"]."*".$data["direccion"]."*".$data["dateadd"];?>
+            <td><?php echo $data["fecha"] ?></td>
+          <?php $dataproveedor = $data["codproveedor"]."*".$data["proveedor"]."*".$data["contacto"]."*".$data["telefono"]."*".$data["direccion"];?>
            <td>
                 <div class="btn-group">
-                    <button type="button" class="btn btn-info btn-view-cliente" data-toggle="modal" data-target="#modal-default" value="<?php echo $datacliente;?>">
+                    <button type="button" class="btn btn-info btn-view-proveedor" data-toggle="modal" data-target="#modal-default" value="<?php echo $dataproveedor;?>">
                     <span class="fa fa-search"></span>
                     </button>
-                    <a href="editar_cliente.php?id=<?php echo $data["idcliente"]; ?>" class="btn btn-warning"><span class="fa fa-pencil"></span></a>
-                    <?php if($data["idcliente"]!=1): ?>
-								    <a href="eliminar_clientes.php?id=<?php echo $data["idcliente"]; ?>" class="btn btn-danger btn-remove"><span class="fa fa-remove"></span></a>
-                    <?php else: ?>
-                  <?php endif; ?>
+                    <a href="editar_proveedor.php?id=<?php echo $data["codproveedor"]; ?>" class="btn btn-warning"><span class="fa fa-pencil"></span></a>
+                    <?php //if($data["idcliente"]!=1): ?>
+								    <a href="eliminar_proveedor.php?id=<?php echo $data["codproveedor"]; ?>" class="btn btn-danger btn-remove"><span class="fa fa-remove"></span></a>
+                    <?php //else: ?>
+                  <?php //endif; ?>
 							 </div>
             </td>
           </tr>
@@ -83,7 +80,7 @@
 
 							}
 						} 
-
+ mysqli_close($conexion); 
 			 		?>
                                     
                             </tbody>
@@ -105,7 +102,7 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Informacion del Cliente</h4>
+        <h4 class="modal-title">Informacion del Proveedor</h4>
       </div>
       <div class="modal-body">
         
@@ -124,6 +121,8 @@
 <!-- /.modal -->
 
 </section>
+
+
 
 
 

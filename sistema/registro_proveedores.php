@@ -15,7 +15,7 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                <i class='fa fa-user-plus'> </i> Usuarios
+                <i class='fa fa-plus'> </i> Proveedor
                 <small>Nuevo</small>
                 </h1>
             </section>
@@ -32,28 +32,26 @@
 
 			if(!empty($_POST)):?>
 				<?php  $alert='';?>
-				<?php if(empty($_POST['nombre']) || empty($_POST['correo']) || empty($_POST['usuario']) || empty($_POST['clave']) || empty($_POST['rol'])): ?>
+				<?php if(empty($_POST['proveedor']) || empty($_POST['contacto']) || empty($_POST['telefono']) || empty($_POST['direccion']) || empty($_POST['fecha'])): ?>
 				<?php echo '<div class="alert"><p class="msg_error">Todos los campos son obligatorios.</p></div>'; ?>
 				
 
 				<?php else:?>
-					<?php $nombre = $_POST['nombre'];
-						$email = $_POST['correo'];
-						$user = $_POST['usuario'];
-						$clave = md5($_POST['clave']);
-						$rol = $_POST['rol'];
+					<?php 
+						$nombre = $_POST['proveedor'];
+						$contacto = $_POST['contacto'];
+						$telefono = $_POST['telefono'];
+						$direccion = $_POST['direccion'];
+						$fecha = $_POST['fecha'];
 
-						$query = mysqli_query($conexion, "SELECT * FROM usuario WHERE usuario = '$user' OR correo = '$email'");
+						$query = mysqli_query($conexion, "SELECT * FROM proveedor WHERE proveedor = '$nombre'");
 						$resultado = mysqli_fetch_array($query); 
 						if($resultado > 0):?>
-							<?php //header('location: ../sistema/lista_usuarios.php'); ?>
 								<?php echo '<div class="alert"><p class="msg_error">El usuario o el correo ya existe.</p></div>'; ?>
 						<?php else: ?>
-							<?php $query_insert = mysqli_query($conexion, "INSERT INTO usuario(nombre, correo, usuario, clave, rol) VALUES('$nombre','$email','$user','$clave','$rol')");
+							<?php $query_insert = mysqli_query($conexion, "INSERT INTO proveedor(proveedor, contacto, telefono, direccion, fecha) VALUES('$nombre','$contacto','$telefono','$direccion','$fecha')");
 						if ($query_insert):?>
-							<?php echo '<div class="alert"><p class="msg_save">Usuario creado exitosamente</p></div>'; ?>
-						
-						
+							<?php echo '<div class="alert"><p class="msg_save">Proveedor registrado exitosamente</p></div>'; ?>
 						<?php else: ?>
 							<?php echo '<div class="alert"><p class="msg_error">Error al crear el usuario.</p></div>'; ?>
 						<?php endif; ?>
@@ -64,43 +62,29 @@
 			
 			<form action="" method="POST">
 				<div class="form-group">
-				<label for="nombre" >Nombre</label>
-				<input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre Completo">
+				<label for="proveedor" >Nombre</label>
+				<input type="text" class="form-control" name="proveedor" id="proveedor" placeholder="Nombre del proveedor">
 			</div>
 			<div class="form-group">
-				<label for="correo" >Correo electrónico</label>
-				<input type="email" class="form-control" name="correo" id="correo" placeholder="Correo Electrónico">
+				<label for="contacto" >Contacto</label>
+				<input type="text" class="form-control" name="contacto" id="contacto" placeholder="Nombre del contacto del proveedor">
 			</div>
 			<div class="form-group">
-				<label for="usuario" >Usuario</label>
-				<input type="text" class="form-control" name="usuario" id="usuario" placeholder="Usuario">
+				<label for="telefono" >Telefono</label>
+				<input type="text" class="form-control" name="telefono" id="telefono" placeholder="Telefono del contacto del proveedor">
 			</div>
 			<div class="form-group">
-				<label for="clave" >Contraseña</label>
-				<input type="password" class="form-control" name="clave" id="clave" placeholder="Contraseña">
+				<label for="direccion" >Dirección</label>
+				<input type="text" class="form-control " name="direccion" id="direccion" placeholder="Ubicacion del proveedor">
 			</div>
-				<!--<label for="rclave" >Repetir Contraseña</label>
-					<input type="password" name="rclave" id="rclave" placeholder="Confirmar Contraseña">-->
-					<label for="rol">Tipo usuario</label>
-					<?php 
-					$query_rol =  mysqli_query($conexion, "SELECT * FROM rol");
-					$result_rol = mysqli_num_rows($query_rol);
-					?>
-					<div class="form-group">
-					<select name="rol" id="rol" class="form-control">
-						<?php 
-						if ($result_rol > 0) {
-							while ($rol = mysqli_fetch_array($query_rol)) {
-								?>
-								<option value="<?php echo $rol["idrol"]; ?>"><?php echo $rol["rol"]; ?></option>
-								<?php
-								}
-							} ?>
-					</select>
-				</div>
+			<div class="form-group">
+				<?php date_default_timezone_set('America/El_Salvador'); $fecha_actual = date("d/m/Y"); ?>
+                <input type="hidden" value="<?php echo $fecha_actual?>" class="form-control" name="fecha" readonly>
+			</div>
+				
 					<div class="form-group">
 						<button type="submit" class="btn btn-success btn-info"><i class='fa fa-save'></i> Guardar</button>
-						<a href="lista_usuarios.php" class="btn btn-success btn-danger"><i class='fa fa-ban'> </i> Cancelar</a> 
+						<a href="lista_proveedores.php" class="btn btn-success btn-danger"><i class='fa fa-ban'> </i><?php mysqli_close($conexion); ?> Cancelar</a> 
                      </div>
 
 				</form>

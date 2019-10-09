@@ -127,7 +127,7 @@ include "../conexion.php";
 		$alert='';
 		if(empty($_POST['nombre']) || empty($_POST['numero']))
 		{
-			echo '<div style="width: 100%; background: #66e07d66; border-radius: 5px; margin: 20px auto;"><p style="color: #e65656; font-size: 14px;">Los campos nombre y numero del documento son necesarios.</p></div>';
+			echo '<div class="alert"><p class="msg_error">El nombre del cliente y numero del documento son necesarios.</p></div>';
 		}else{
 
 			$idcliente = $_POST['id'];
@@ -147,7 +147,7 @@ include "../conexion.php";
 			$result = mysqli_fetch_array($query);
 
 			if($result > 0){
-				echo '<div style="width: 100%; background: #66e07d66; border-radius: 5px; margin: 20px auto;"><p style="color: #e65656; font-size: 14px;">El numero de documento o el nombre del cliente ya existe.</p></div>';
+				echo '<div class="alert"><p class="msg_error">El numero de documento o el nombre del cliente ya existe.</p></div>';
 			}else{
 
 				$sql_update = mysqli_query($conexion, "UPDATE cliente 
@@ -157,7 +157,7 @@ include "../conexion.php";
 				if($sql_update){
 					
 				}else{
-					echo '<div style="width: 100%; background: #66e07d66; border-radius: 5px; margin: 20px auto;"><p style="color: #e65656; font-size: 14px;">Error al actualizar el cliente.</p></div>';
+					echo '<div class="alert"><p class="msg_error">Error al actualizar el cliente.</p></div>';
 				}
 
 			}

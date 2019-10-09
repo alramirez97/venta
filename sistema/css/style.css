@@ -16,21 +16,26 @@
 	margin: 15px auto;
 }
 .alert{
+	text-align: center;
 	width: 100%;
 	background: #66e07d66;
 	border-radius: 5px;
-	margin: 20px auto;
+	margin: 10px auto;
 }
 .msg_error{
+	text-align: center;
 	color: #e65656;
-	font-size: 14px;
+	font-size: 20px;
 }
 .msg_save{
+	text-align: center;
 	color: #126e00;
-	font-size: 14px;
+	font-size: 20px;
 }
 .alert p{
-	padding: 10px;
+	text-align: center;
+	justify-content: center;
+	padding: 5px;
 }
 /*****Lista de usuarios*******/
 #container h1{

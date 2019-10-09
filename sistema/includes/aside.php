@@ -31,10 +31,14 @@
             <i class="fa fa-cogs"></i><span>Mantenimiento</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
           </a>
           <ul class="treeview-menu">
-              <?php //if($_SESSION['rol'] != 1): ?>
+              <?php if($_SESSION['rol'] != 1): ?>
               <li><a href="lista_clientes.php"><i class="fa fa-circle-o"></i> Clientes</a></li>
               <li><a href=""><i class="fa fa-circle-o"></i> Productos</a></li>
-              <li><a href=""><i class="fa fa-circle-o"></i> Proveedores</a></li>
+              <?php else: ?>
+              <li><a href="lista_clientes.php"><i class="fa fa-circle-o"></i> Clientes</a></li>
+              <li><a href=""><i class="fa fa-circle-o"></i> Productos</a></li>
+              <li><a href="lista_proveedores.php"><i class="fa fa-circle-o"></i> Proveedores</a></li>
+              <?php endif; ?>
           </ul>
         </li>
         <li class="treeview">

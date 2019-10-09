@@ -41,7 +41,7 @@ include "../conexion.php";
 		$alert='';
 		if(empty($_POST['nombre']) || empty($_POST['correo']) || empty($_POST['usuario'])  || empty($_POST['rol']))
 		{
-			echo '<div style="width: 100%; background: #66e07d66; border-radius: 5px; margin: 20px auto;"><p style="color: #e65656; font-size: 14px;">Todos los campos son obligatorios.</p></div>';
+			
 		}else{
 
 			$idUsuario = $_POST['idUsuario'];
@@ -59,7 +59,7 @@ include "../conexion.php";
 			$result = mysqli_fetch_array($query);
 
 			if($result > 0){
-				echo '<div style="width: 100%; background: #66e07d66; border-radius: 5px; margin: 20px auto;"><p style="color: #e65656; font-size: 14px;">El usuario o el correo ya existe.</p></div>';
+				
 			}else{
 
 				if(empty($_POST['clave']))
@@ -116,7 +116,7 @@ include "../conexion.php";
 		$alert='';
 		if(empty($_POST['nombre']) || empty($_POST['correo']) || empty($_POST['usuario'])  || empty($_POST['rol']))
 		{
-			echo '<div style="width: 100%; background: #66e07d66; border-radius: 5px; margin: 20px auto;"><p style="color: #e65656; font-size: 14px;">Todos los campos son obligatorios.</p></div>';
+			echo '<div class="alert"><p class="msg_error">Todos los campos son obligatorios.</p></div>';
 		}else{
 
 			$idUsuario = $_POST['idUsuario'];
@@ -125,8 +125,6 @@ include "../conexion.php";
 			$user   = $_POST['usuario'];
 			$clave  = md5($_POST['clave']);
 			$rol    = $_POST['rol'];
-
-
 			$query = mysqli_query($conexion,"SELECT * FROM usuario 
 													   WHERE (usuario = '$user' AND idusuario != $idUsuario)
 													   OR (correo = '$email' AND idusuario != $idUsuario) ");
@@ -134,11 +132,10 @@ include "../conexion.php";
 			$result = mysqli_fetch_array($query);
 
 			if($result > 0){
-				echo '<div style="width: 100%; background: #66e07d66; border-radius: 5px; margin: 20px auto;"><p style="color: #e65656; font-size: 14px;">El usuario o el correo ya existe.</p></div>';
+				echo '<div class="alert"><p class="msg_error">El usuario o el correo ya existe.</p></div>';
 			}else{
 				if(empty($_POST['clave']))
 				{
-
 					$sql_update = mysqli_query($conexion,"UPDATE usuario
 															SET nombre = '$nombre', correo='$email',usuario='$user',rol='$rol'
 															WHERE idusuario= $idUsuario ");
@@ -149,9 +146,8 @@ include "../conexion.php";
 
 				}
 				if($sql_update){
-					
 				}else{
-					echo '<div style="width: 100%; background: #66e07d66; border-radius: 5px; margin: 20px auto;"><p style="color: #e65656; font-size: 14px;">Error al actualizar el usuario.</p></div>';
+					echo '<div class="alert"><p class="msg_error">Error al actualizar el usuario.</p></div>';
 				}
 			}
 		}
