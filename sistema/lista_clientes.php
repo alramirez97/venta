@@ -1,8 +1,6 @@
 <?php 
   session_start();
-  if($_SESSION['rol'] != 1){
-    header('Location: ./');
-  }
+  
 	include "../conexion.php";
 
  ?>
@@ -36,9 +34,9 @@
 				<tr>
 					<th>#</th>
 					<th>Nombre</th>
-          <th>Tipo de Cliente</th>
-          <th>Tipo de Documento</th>
-          <th>No. de documento</th>
+          <th>Tipo Cliente</th>
+          <th>Tipo Documento</th>
+          <th>No. Documento</th>
           <th>Telefono</th>
           <th>Dirección</th>
 					<th>Acciones</th>
@@ -73,9 +71,9 @@
                     <button type="button" class="btn btn-info btn-view-cliente" data-toggle="modal" data-target="#modal-default" value="<?php echo $datacliente;?>">
                     <span class="fa fa-search"></span>
                     </button>
-                    <a href="editar_usuario.php?id=<?php echo $data["idusuario"]; ?>" class="btn btn-warning"><span class="fa fa-pencil"></span></a>
+                    <a href="editar_cliente.php?id=<?php echo $data["idcliente"]; ?>" class="btn btn-warning"><span class="fa fa-pencil"></span></a>
                     <?php //if($data["idusuario"]!=1): ?>
-								    <a href="eliminar_confirmar.php?id=<?php echo $data["idusuario"]; ?>" class="btn btn-danger btn-remove"><span class="fa fa-remove"></span></a>
+								    <a href="eliminar_cliente.php?id=<?php echo $data["idcliente"]; ?>" class="btn btn-danger btn-remove"><span class="fa fa-remove"></span></a>
                     <?php //else: ?>
                   <?php //endif; ?>
 							 </div>
@@ -107,7 +105,7 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Informacion del Usuario</h4>
+        <h4 class="modal-title">Informacion del Cliente</h4>
       </div>
       <div class="modal-body">
         
